@@ -63,6 +63,7 @@ def ngrammer(l,n):
 	#temp.extend([i+"s" if i[-1]!='s' and i.split()[-1] not in Stopwords else i[0:-1] for i in temp])
 	yield temp
 
+
 def text_transformer(text):
 	#nouns list from text blob
 	#TextBlobnouns=[x.encode('utf-8') for x in multi_blobber(text)]
@@ -92,7 +93,7 @@ def text_transformer(text):
 	yield two_five_ngrams
 	#return ensemble+','
 
-class WordCount(CCJob):
+class Ngrammer(CCJob):
   def process_record(self, record):
     if record['Content-Type'] != 'text/plain':
       return
@@ -105,4 +106,4 @@ class WordCount(CCJob):
     self.increment_counter('commoncrawl', 'processed_pages', 1)
 
 if __name__ == '__main__':
-  WordCount.run()
+  Ngrammer.run()
